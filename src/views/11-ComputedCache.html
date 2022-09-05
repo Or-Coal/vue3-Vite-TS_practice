@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+	<fieldset id="">
+		<legend>计算属性：computed</legend>
+		<div id="app1">
+			<p @click="message = '计算属性'">
+				第一次：{{reversedMessage}}
+			</p>
+			<p @click="message = '计算属性'">
+				第二次：{{reversedMessage}}
+			</p>
+		</div>
+		<script type="text/javascript">
+			const { createApp } = Vue;
+			var app1 = createApp({
+				data() {
+					return {
+						message: "Hello Vue!"
+					}
+				},
+				computed: {
+					reversedMessage: function () {
+						//用了两次，打印一次（特性：计算属性有缓存）
+						console.log(`计算属性：${new Date().getTime()}`);
+						return this.message.split('').reverse().join('');
+					}
+				}
+			}).mount('#app1');
+		</script>
+	</fieldset>
+	<fieldset id="">
+		<legend>普通函数：methods</legend>
+		<div id="app2">
+			<p @click="message = '函数方法'">
+				第一次：{{reversedMessage()}}
+			</p>
+			<p @click="message = '函数方法'">
+				第二次：{{reversedMessage()}}
+			</p>
+		</div>
+		<script type="text/javascript">
+			var app2 = createApp({
+				data() {
+					return {
+						message: "Hello Vue!"
+					}
+				},
+				methods: {
+					reversedMessage: function () {
+						//用了两次，打印两次
+						console.log(`函数方法：${new Date().getTime()}`);
+						return this.message.split('').reverse().join('');
+					}
+				}
+			}).mount("#app2");
+		</script>
+	</fieldset>
+</body>
+
+</html>
