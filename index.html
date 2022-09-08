@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js">
+    setTimeout(function () {
+      console.log(1);
+    }, 100);
+
+    new Promise(function (resolve) {
+      console.log(2);
+      resolve();
+      console.log(3);
+    }).then(function () {
+      console.log(4);
+      new Promise((resove, reject) => {
+        console.log(5);
+        setTimeout(() => {
+          console.log(6);
+        }, 10);
+      })
+    });
+    console.log(7);
+    console.log(8);
+
+  </script>
+</body>
+
 </html>
