@@ -1,69 +1,96 @@
 <script setup>
-	import FiveStarEvaluation from '@/views/20-五星评价.vue'
-	import Counter from '@/components/Counter.vue';
-	import { ref, computed, reactive } from 'vue';
-function time(){
+import FiveStarEvaluation from '@/components/20-五星评价.vue'
+import Counter from '@/components/Counter (1).vue';
+import chuansuokuang from '@/components/chuansuokuang.vue';
+import { ref, computed, reactive } from 'vue';
+const listarr_left = reactive([
+	{ key: 0, label: "备选项1", disabled: false, isList: false },
+	{ key: 1, label: "备选项2", disabled: false, isList: false },
+	{ key: 2, label: "备选项3", disabled: false, isList: false },
+	{ key: 3, label: "备选项4", disabled: true, isList: false },
+	{ key: 4, label: "备选项5", disabled: false, isList: false },
+	{ key: 5, label: "备选项6", disabled: false, isList: false },
+	{ key: 6, label: "备选项7", disabled: false, isList: false },
+	{ key: 7, label: "备选项8", disabled: false, isList: false },
+	{ key: 8, label: "备选项9", disabled: false, isList: false },
+]);
+const listarr_right = reactive([
+	{ key: 9, label: "备选项10", disabled: false, isList: false },
+	{ key: 10, label: "备选项11", disabled: false, isList: false },
+	{ key: 11, label: "备选项12", disabled: true, isList: false },
+	{ key: 12, label: "备选项13", disabled: false, isList: false },
+	{ key: 13, label: "备选项14", disabled: false, isList: false },
+	{ key: 14, label: "备选项15", disabled: true, isList: false },
+	{ key: 15, label: "备选项16", disabled: false, isList: false },
+	{ key: 16, label: "备选项17", disabled: false, isList: false },
+	{ key: 17, label: "备选项18", disabled: false, isList: false },
+]);
+
+function time() {
 	return new Date()
-} 
-let WangZai = ref(null)
-	let order = ref(1);
-	let books = reactive([
-		{ id: 1, author: '曹雪芹', name: '红楼梦', num: 3, price: 32.0, checked: false },
-		{ id: 2, author: '施耐庵', name: '水浒传', num: 3, price: 30.0, checked: false },
-		{ id: 3, author: '罗贯中', name: '三国演义', num: 4, price: 24.0, checked: false },
-		{ id: 4, author: '吴承恩', name: '西游记', num: 3, price: 20.0, checked: false }
-	]);
-	// 全选
-	let checkAll = computed({
-		set(newValue) {
-			books.forEach((book, index) => {
-				book.checked = newValue;
-			});
-		},
-		get() {
-			// 空数组，不运行?
-			if (!books.length) {
-				return false;
-			}
-			return books.every((book, index) => book.checked);
+}
+let WangZai = ref(3)
+let order = ref(1);
+let books = reactive([
+	{ id: 1, author: '曹雪芹', name: '红楼梦', num: 3, price: 32.0, checked: false },
+	{ id: 2, author: '施耐庵', name: '水浒传', num: 3, price: 30.0, checked: false },
+	{ id: 3, author: '罗贯中', name: '三国演义', num: 4, price: 24.0, checked: false },
+	{ id: 4, author: '吴承恩', name: '西游记', num: 3, price: 20.0, checked: false }
+]);
+// 全选
+let checkAll = computed({
+	set(newValue) {
+		books.forEach((book, index) => {
+			book.checked = newValue;
+		});
+	},
+	get() {
+		// 空数组，不运行?
+		if (!books.length) {
+			return false;
 		}
-	});
-	// 计算属性--总数
-	let total = computed(() => {
-		return books.reduce(function(total, book, index) {
-			if (book.checked) {
-				return total + book.num;
-			} else {
-				return total
-			}
-		}, 0);
-	});
-	// 计算属性--总价
-	let cost = computed(() => {
-		return books.reduce(function(total, book, index) {
-			if (book.checked) {
-				return total + book.num * book.price;
-			} else {
-				return total
-			}
-		}, 0);
-	});
-	// 排序
-	function handleSort() {
-		books.sort((itemA, itemB) => {
-			return (itemA.price - itemB.price) * order.value;
-		})
-		order.value = -order.value;
+		return books.every((book, index) => book.checked);
 	}
-	// 删除
-	function handleRemove(i) {
-		books.splice(i, 1);
-	}
+});
+// 计算属性--总数
+let total = computed(() => {
+	return books.reduce(function (total, book, index) {
+		if (book.checked) {
+			return total + book.num;
+		} else {
+			return total
+		}
+	}, 0);
+});
+// 计算属性--总价
+let cost = computed(() => {
+	return books.reduce(function (total, book, index) {
+		if (book.checked) {
+			return total + book.num * book.price;
+		} else {
+			return total
+		}
+	}, 0);
+});
+// 排序
+function handleSort() {
+	books.sort((itemA, itemB) => {
+		return (itemA.price - itemB.price) * order.value;
+	})
+	order.value = -order.value;
+}
+// 删除
+function handleRemove(i) {
+	books.splice(i, 1);
+}
 	// 数量修改：
 	// function handleChange(book, data) {
 	// 	console.log(data);
 	// 	book.num = data;
 	// }
+	function aaafun(arr){
+		console.log(arr)
+	}
 </script>
 
 <template>
@@ -117,8 +144,24 @@ let WangZai = ref(null)
 		</div>
 	</div>
 	<div>
-	    <FiveStarEvaluation v-model="WangZai"></FiveStarEvaluation>
-		<Counter></Counter>
 	</div>
+	<Counter></Counter>
 
+	<FiveStarEvaluation v-model="WangZai"></FiveStarEvaluation>
+	<chuansuokuang v-bind:data="listarr_left" v-model:value="listarr_right"></chuansuokuang>
+	<ol>
+		<li>
+			参照element框架中的<a href="https://element.eleme.cn/#/zh-CN/component/transfer">穿梭框</a>完成组件的封装
+		</li>
+		<li>
+			可以全选、单选，实现左右的跳换
+		</li>
+		<li>
+			组件拥有data属性，允许传入外部数据
+		</li>
+		<li>
+			组件拥有value属性，v-model绑定，代表右侧组件的结果，可以通过value获取到已选中的选项
+		</li>
+	</ol>
+	{{listarr_right}}
 </template>

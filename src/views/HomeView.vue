@@ -82,6 +82,9 @@
     <router-link to="/chuansuo" class="list-group-item list-group-item-action"
       >穿梭框</router-link
     >
+    <router-link to="/Components/Package" class="list-group-item list-group-item-action"
+      >使用封装的组件</router-link
+    >
   </div>
 </template>
 
