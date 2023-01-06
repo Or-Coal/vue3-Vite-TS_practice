@@ -52,3 +52,14 @@ function fn1() :void{
 function fn2 ():never{
 throw new Error('报错了!')
 }
+
+// object 表示一个js对象
+let a:object
+// 都是一个对象 对其限制作用不大
+a={}
+a=function(){}
+// 我们最想要限制的是里面的属性
+// {}用来指定对象中可以包含哪些属性
+// 语法:{属性名:属性值}
+let h:{name:string};
+h = {name:'孙悟空'}
