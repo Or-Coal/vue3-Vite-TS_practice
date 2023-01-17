@@ -63,3 +63,19 @@ a=function(){}
 // 语法:{属性名:属性值}
 let h:{name:string};
 h = {name:'孙悟空'}
+// 在属性名后边加上?,表示属性是可选的
+let j:{name:string,age?:number};
+j = {name:'孙悟空',age:18}
+// [propName:string]字符串类型的属性名
+let i:{name:string,[propName:string]:any}
+// 定义只能传两个参数 返回值为number一个函数的类型声明
+let k :(a:number,b:number)=>number
+k = function(n1,n2):number{
+    return n1+n2
+}
+
+// 数组 字符串类型数组
+let l:string[]
+l = ['a','b','c']
+// 表示数值类型数组
+let m:Array<number>
