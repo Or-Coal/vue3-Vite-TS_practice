@@ -74,8 +74,34 @@ k = function(n1,n2):number{
     return n1+n2
 }
 
+//数组类型的声明
+//1.类型[] 2.Array<类型>
 // 数组 字符串类型数组
 let l:string[]
 l = ['a','b','c']
 // 表示数值类型数组
 let m:Array<number>
+
+// 元组，元组就是固定长度的数组 语法[类型，类型，类型]
+let n:[string,string]
+
+// enum 枚举 
+// 定义枚举类
+enum Gender{
+    Male = 0,
+    Female = 1
+}
+let o:{name:string,gender:Gender}
+o = {
+    name:'孙悟空',
+    gender:Gender.Female
+}
+ 
+// &表示同时
+// 这样写本身就是错误的
+let p:string&number
+let q:{name:string} & {age:number}
+
+// 类型的别名
+type myType = 1|2|3|4|5;
+let r : myType
